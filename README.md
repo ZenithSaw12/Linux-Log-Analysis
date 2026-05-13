@@ -2,8 +2,12 @@
 
 ### Manual Log Analysis
 
+> Log File Snippet
+>
 > <img src="images/1log.png" alt="Sample Logs" width="60%">
 
+> Some Suspicious Event Logged on Google Sheets
+>
 > <img src="images/2sheets.png" alt="Findings" width="60%">
 
 #### Summary
@@ -50,7 +54,8 @@ This python script opens the Linux_2k.log file and reads each line, appending it
 ### Running The Script
 
 > Output Snippet
-> <img src="images/2sheets.png" alt="Findings" width="60%">
+> 
+> <img src="images/3output.png" alt="Output" width="60%">
 
 We can export the script as a csv and open in Excel or Sheets
 
