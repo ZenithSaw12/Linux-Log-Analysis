@@ -45,3 +45,27 @@ print(f"\nTotal suspicious entries found:{len(suspicious_entries)}")
 ```
 
 This python script opens the Linux_2k.log file and reads each line, appending it to a list called `logs`. From `logs`, it takes lines 200 to 500 and puts them into a subset list called `subset_logs`. We use a for loop to interate through each line in `subset_logs` to check for keywords such as "Failed password", "authentication failure", "user unkown", and "invalid user". Any matching line is added to the list `suspicious_entries` with a tag for the event type (e.g. Auth Failure). The script prints flagged entires and shows the total number of suspicious entries discovered. Scanning log lines is automated so that suspicious activity is quickly identified, otherwise needing manual review.
+
+
+### Running The Script
+
+> Output Snippet
+> <img src="images/2sheets.png" alt="Findings" width="60%">
+
+We can export the script as a csv and open in Excel or Sheets
+
+> python
+```python
+
+# Step 5: Save results to a CSV file
+import csv
+
+with open("suspicious_logs.csv", "w", newline="") as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(["Type", "Log Entry"])
+    writer.writerows(suspicious_entries)
+print("Results saved to suspicious_logs.csv")
+
+```
+
+
