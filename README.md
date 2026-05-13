@@ -73,4 +73,26 @@ print("Results saved to suspicious_logs.csv")
 
 ```
 
+## Log Analysis and Visualization with Splunk
 
+### Searching and Filtering Suspicious Activity
+
+Query for suspicious authentication activity
+
+> splunk
+> ```spl
+> source="Linux2k.log" host="ZenithS" sourcetype="Linux" ("Failed
+password" OR "authentication failure" OR "invalid user" OR "user unknown")
+> ```
+
+This filters the log to match the usual indicators of a brute-force attempts or unauthorized access.
+
+This includes:
+
+- Repeated failed logins
+- Invalid or unknown users
+- Authentication failures
+
+> Output
+>
+> <img src="images/4splunk.png" alt="Splunk Output" width="60%">
