@@ -18,5 +18,30 @@ Additionally, the IP address 218.188.2.4 repeatedly triggered "Unknown user" fai
 > python
 ```python
 
-print
+# log_analysis.py
+# Step 1: Open and read log file
+with open("Linux_2k.log", "r", encoding="utf-8") as file:
+    logs = file.readlines() #reads each line and returns list 
+
+# Step 2: Focus on lines 200–500
+subset_logs = logs[199:500] # Python is 0-based index
+
+# Step 3: Search for suspicious patterns
+suspicious_entries = []
+for line in subset_logs:
+    if "Failed password" in line:
+        suspicious_entries.append(("Failed Login", line.strip()))
+    elif "authentication failure" in line:
+        suspicious_entries.append(("Auth Failure", line.strip()))
+    elif "user unknown" in line or "invalid user" in line:
+        suspicious_entries.append(("Unknown User", line.strip()))
+
+# Step 4: Print Results
+print("=== Suspicious Log Entries (Lines 200–500) ===")
+for entry_type, entry in suspicious_entries:
+    print(f"[{entry_type}] {entry}")
+
+print(f"\nTotal suspicious entries found:{len(suspicious_entries)}")
 ```
+
+This python script opens the Linux_2k.log file and reads each line, appending it to a list called `logs`. From `logs`, it takes lines 200 to 500 and puts them into a subset list called `subset_logs`. We use a for loop to interate through each line in `subset_logs` to check for keywords such as "Failed password", "authentication failure", "user unkown", and "invalid user". Any matching line is added to the list `suspicious_entries` with a tag for the event type (e.g. Auth Failure). The script prints flagged entires and shows the total number of suspicious entries discovered. Scanning log lines is automated so that suspicious activity is quickly identified, otherwise needing manual review.
