@@ -96,3 +96,20 @@ This includes:
 > Output
 >
 > <img src="images/4splunk.png" alt="Splunk Output" width="60%">
+
+Running the query, we notice that one entry stands out:
+
+- Repeated failed login attempts
+- Same username attempted: root
+- Same source IP: 207.243.167.114
+- Attempts occur a few seconds apart
+
+These are telltale signs of a brute-force login attempt
+
+### Pattern Analysis
+
+Confirming repetitive behaviour
+
+Now switching to the **Patterns** tab
+
+> <img src="images/5patterns.png" alt="Splunk Patterns Tab" width="60%">
