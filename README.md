@@ -123,3 +123,27 @@ Grouping events with split rows and filters: Highest 10 rhost by count
 > Statistics View
 >
 > <img src="images/6statistics.png" alt="Statistics View" width="60%">
+
+Notice
+
+● 150.183.249.110 has the highest number of event count
+● Targeted username is consistently root
+● Other IPs show fewer and scattered attempts
+
+### Visualization View: Presenting the Attack Timeline
+
+> Linechart
+>
+> > <img src="images/7linechart.png" alt="Linechart Visualization" width="60%">
+
+Observations from the Line Chart
+
+- There are sharp spikes in authentication failures that occur within very short timeframes.
+- A large number of these attempts are specifically directed at the root account.
+- These peaks in activity align with repeated login failures coming from the same source IP addresses.
+
+What This Suggests
+
+- The bursty timing of these events indicates that attackers are using automated brute-force attempts
+- The persistent focus on the root username confirms a clear intent to gain full administrative control over the system.
+- This specific pattern is a classic sign of botnets or automated scanning tools being used to probe for weaknesses.
