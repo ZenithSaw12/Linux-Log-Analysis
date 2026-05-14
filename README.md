@@ -113,3 +113,13 @@ Confirming repetitive behaviour
 Now switching to the **Patterns** tab
 
 > <img src="images/5patterns.png" alt="Splunk Patterns Tab" width="60%">
+
+The data confirms that several source IPs generated repeated authentication failures against the same target account. This consistent, repetitive pattern demonstrates that the activity is a systematic attack rather than a random occurrence.
+
+#### Statisitics View
+
+Grouping events with split rows and filters: Highest 10 rhost by count
+
+> Statistics View
+>
+> <img src="images/6statistics.png" alt="Statistics View" width="60%">
