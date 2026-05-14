@@ -2,7 +2,7 @@
 
 ## Project Objective
 
-The objective of this project was to perform a comprehensive security analysis of Linux system logs using manual, automated, and SIEM-based methods. By identifying patterns of unauthorized access and brute-force attacks, the project aimed to demonstrate how Governance, Risk, and Compliance (GRC) principles—such as risk assessment and control mapping—are applied to real-world security telemetry. The final goal was to transform raw log data into actionable intelligence through technical automation and visual reporting.
+The objective of this project was to perform a comprehensive security analysis of Linux system logs using manual, automated, and SIEM-based methods. By identifying patterns of unauthorized access and brute-force attacks, the project aimed to demonstrate how Governance, Risk, and Compliance (GRC) principles, such as risk assessment and control mapping, are applied to real-world security telemetry. The final goal was to transform raw log data into actionable intelligence through technical automation and visual reporting.
 
 ## Tools and Technologies
 
@@ -14,7 +14,11 @@ The objective of this project was to perform a comprehensive security analysis o
 
 - **Regular Expressions (Regex)**: Utilized within scripts and Splunk queries to filter for specific strings like "Failed password" and "invalid user."
 
-### Manual Log Analysis
+To conduct this project, a sample log file `Linux_2k.log` will be used. It was downloaded from: https://github.com/logpai/loghub.
+
+## Manual Log Analysis
+
+For manual log analysis, I opend the sample log file in VS Code to help track the first 20 to 40 lines.
 
 <div align="center">
   <img src="images/1log.png" alt="Sample Logs" width="70%">
@@ -24,8 +28,18 @@ The objective of this project was to perform a comprehensive security analysis o
 
 <br>
 
+Then I searched for log entries that showed signs of failed logins or unusual activity. This includes:
+
+- Repeated failed logins from the same IP address.
+- Unknown or invalid users are attempting to log in.
+- System alerts or abnormal exits that suggest possible issues.
+
+These events suggest brute-force login attempts, attempts to access invalid users, or unexpected system errors.
+
+<br>
+
 <div align="center">
-    <img src="images/2sheets.png" alt="Findings" width="60%">
+    <img src="images/2sheets.png" alt="Findings" width="70%">
     <br>
     <i>Some Suspicious Event Logged on Google Sheets</i>
     
@@ -38,8 +52,11 @@ The logs reveal multiple authentication failures originating from external sourc
 Additionally, the IP address **218.188.2.4** repeatedly triggered "Unknown user" failures, suggesting that attackers are probing the system by testing various non-existent usernames. On the local side, while standard user sessions for "cyrus" and "news" were opened and closed, a logrotate Alert error was recorded at 4:06:20. This indicates a potential system maintenance issue or misconfiguration that requires further investigation alongside the external security threats.
 
 
-### Automating Log Analysis
+## Automating Log Analysis
 
+To automate the log analysis, I will be utilizing a simple Python script in VS Code. It will scan for any suspicious activity such as failed logins, invalid users, etc. For this project I will focus on lines 200-500.
+
+Here is the python script:
 > python
 ```python
 
@@ -75,15 +92,18 @@ This python script opens the Linux_2k.log file and reads each line, appending it
 #### Running The Script
 
 <div align="center">
-    <img src="images/3output.png" alt="Output" width="80%">
+    <img src="images/3output.png" alt="Output" width="90%">
     <br>
     <i>Output To Terminal Snippet</i>
-    
 </div>
 
 <br>
 
-We can export the script as a csv and open in Excel or Sheets
+The script found 140 suspicious events in lines 200-500.
+
+<br>
+
+We can also export the script as a csv and open in Excel or Sheets
 
 > python
 ```python
@@ -103,9 +123,13 @@ print("Results saved to suspicious_logs.csv")
 
 ## Log Analysis and Visualization with Splunk
 
+Now with Splunk, we will ingest, querry, and visualize the sample log data and identify suspicious activies at scale.
+
 ### Searching and Filtering Suspicious Activity
 
-Query for suspicious authentication activity
+After uploading `Linux_2k.log` to Splunk, we can now analyze the data.
+
+Query for suspicious authentication activity:
 
 > splunk
 > ```spl
@@ -141,12 +165,10 @@ _These are telltale signs of a brute-force login attempt_
 
 ### Pattern Analysis
 
-Confirming repetitive behaviour
-
-Now switching to the **Patterns** tab
+Now switching to the **Patterns** tab, we can confirm repetitive behaviour:
 
 <div align="center">
-    <img src="images/5patterns.png" alt="Splunk Patterns Tab" width="60%">
+    <img src="images/5patterns.png" alt="Splunk Patterns Tab" width="90%">
     <br>
     <i>Patterns Tab</i>
 </div>
@@ -155,10 +177,11 @@ Now switching to the **Patterns** tab
 
 The data confirms that several source IPs generated repeated authentication failures against the same target account. This consistent, repetitive pattern demonstrates that the activity is a systematic attack rather than a random occurrence.
 
-#### Statisitics View
+### Statisitics View
 
+Now switching over to the statistics tab:
 <div align="center">
-    <img src="images/6statistics.png" alt="Statistics View" width="60%">
+    <img src="images/6statistics.png" alt="Statistics View" width="90%">
     <br>
     <i>Grouping events with split rows and filters (Highest 10 rhost by count)</i>
 </div>
@@ -172,6 +195,8 @@ Notice:
 - Other IPs show fewer and scattered attempts
 
 ### Visualization View: Presenting the Attack Timeline
+
+<br>
 
 <div align="center">
     <img src="images/7linechart.png" alt="Linechart Visualization" width="60%">
@@ -195,6 +220,11 @@ Notice:
 
 # Lessons Learned
 
+- **Pattern Recognition**: Learned to distinguish between random probing and systematic brute-force attacks by analyzing IP repetition and target consistency.
+
+- **Automation Efficiency**: Developed an understanding of how Python scripting significantly reduces the time required to audit large datasets compared to manual review.
+
+- **SIEM Value**: Gained hands-on experience in how SIEM tools like Splunk provide a "bird’s-eye view" of security posture through visualizations that raw logs cannot offer.
 
 # Contact & Links
 
