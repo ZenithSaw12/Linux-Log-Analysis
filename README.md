@@ -1,5 +1,19 @@
 # Linux Log File Analysis, Automation, and SIEM Visualization
 
+## Project Objective
+
+The objective of this project was to perform a comprehensive security analysis of Linux system logs using manual, automated, and SIEM-based methods. By identifying patterns of unauthorized access and brute-force attacks, the project aimed to demonstrate how Governance, Risk, and Compliance (GRC) principles—such as risk assessment and control mapping—are applied to real-world security telemetry. The final goal was to transform raw log data into actionable intelligence through technical automation and visual reporting.
+
+## Tools and Technologies
+
+- **Splunk (SIEM)**: Used for log ingestion, pattern analysis, and creating visual dashboards to track attack timelines.
+
+- **Python**: Leveraged to automate the parsing of large log files and extract specific security events.
+
+- **Google Sheets / Excel**: Used for manual documentation, initial risk logging, and data organization.
+
+- **Regular Expressions (Regex)**: Utilized within scripts and Splunk queries to filter for specific strings like "Failed password" and "invalid user."
+
 ### Manual Log Analysis
 
 <div align="center">
@@ -178,3 +192,12 @@ Notice:
 - The bursty timing of these events indicates that attackers are using automated brute-force attempts
 - The persistent focus on the root username confirms a clear intent to gain full administrative control over the system.
 - This specific pattern is a classic sign of botnets or automated scanning tools being used to probe for weaknesses.
+
+# Lessons Learned
+
+
+# Contact & Links
+
+- LinkedIn: www.linkedin.com/in/zenithsaw
+
+- GitHub: https://github.com/ZenithSaw12
