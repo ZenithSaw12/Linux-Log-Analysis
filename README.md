@@ -134,7 +134,7 @@ Notice
 
 > Linechart
 >
-> > <img src="images/7linechart.png" alt="Linechart Visualization" width="60%">
+> <img src="images/7linechart.png" alt="Linechart Visualization" width="60%">
 
 Observations from the Line Chart
 
